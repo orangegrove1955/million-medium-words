@@ -28,7 +28,21 @@ const getUserPosts = async _ => {
           const postContent = post.content.replace(/<[^>]*>/g, "");
           totalCount += postContent.split(" ").length;
         });
+
+        // Colour background based on word count
+        switch (true) {
+          case totalCount < 1000:
+            document.body.style.backgroundColor = "blue";
+            break;
+          case totalCount < 10000:
+            document.body.style.backgroundColor = "lightGreen";
+            break;
+          default:
+            document.body.style.backgroundColor = "white";
+        }
         document.getElementById("countTotal").innerText = totalCount;
+        document.getElementById("countTotal").style.display = "block";
+        document.getElementById("userNameInput").style.display = "none";
       });
     // If field is empty, request a username
   } else {
