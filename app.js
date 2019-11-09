@@ -22,9 +22,7 @@ const getUserPosts = async _ => {
       // Iterate through posts, replacing HTML tags, and count words
       .then(data => {
         let totalCount = 0;
-        let bodyStyle = document.body.style;
-        // TODO: Access icon with body style simultaneously
-        let icon = document.getElementById("github-icon").style;
+        let bodyStyle = document.getElementById("background").style;
         const posts = data.items.filter(item => item.categories.length > 0);
 
         posts.forEach(post => {
@@ -35,20 +33,19 @@ const getUserPosts = async _ => {
         // Colour background based on word count
         switch (true) {
           case totalCount < 1000:
-            bodyStyle.backgroundColor = "blue";
-            bodyStyle.color = "white";
-            icon.color = "white";
+            bodyStyle.background = "blue";
+            document.querySelector("h1").style.color = "white";
             break;
           case totalCount < 10000:
-            bodyStyle.backgroundColor = "lightGreen";
+            bodyStyle.background = "lightgreen";
             break;
           default:
-            bodyStylebackgroundColor = "white";
+            bodyStylebackground = "white";
         }
-        bodyStyle.transition = "background-color 1.5s ease, color 1.5s ease";
-        icon.transition = "color 1.5s ease";
+        bodyStyle.transition = "background 1.5s ease, color 1.5s ease";
         document.getElementById("countTotal").innerText = totalCount;
-        document.getElementById("countTotal").style.display = "block";
+        // TODO: Fade in card
+        document.querySelector(".card").style.display = "flex";
         document.getElementById("userNameInput").style.display = "none";
       });
     // If field is empty, request a username
